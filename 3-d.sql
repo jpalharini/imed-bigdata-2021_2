@@ -14,7 +14,3 @@ BEGIN
 			USING HINT = 'Favor verificar o código da sessão ou espetáculo informado!';
 END; 
 $$
-
-
-
-
