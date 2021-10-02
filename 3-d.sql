@@ -11,7 +11,7 @@ BEGIN
 	EXCEPTION
 	WHEN sqlstate '23503' THEN
 		RAISE EXCEPTION 'Sessão ou espetáculo não existem'
-			USING HINT = 'Favor verificar o código da sessão ou espetáculo informado';
+			USING HINT = 'Favor verificar o código da sessão ou espetáculo informado!';
 END; 
 $$
 
