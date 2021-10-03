@@ -1,5 +1,5 @@
 SET SEARCH_PATH TO trabalho_g1;
-
+--
 CREATE OR REPLACE PROCEDURE criar_reserva(cod_espetaculo IN INT, cod_sessao IN INT, 
 cod_pedido IN INT, cadeira IN VARCHAR(10))
 LANGUAGE plpgsql
