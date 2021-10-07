@@ -6,8 +6,8 @@ RETURNS trigger AS $$
 		update sessao set ingressos_disponiveis = ingressos_disponiveis - 1;
 	END;
 	
-$$ LANGUAGE plpgsql	
+$$ LANGUAGE plpgsql;
 
 CREATE TRIGGER decre_ingre_disponivel AFTER INSERT ON reserva
 	FOR EACH ROW
-		EXECUTE FUNCTION decre_ingresso();	
+		EXECUTE FUNCTION decre_ingresso();
