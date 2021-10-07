@@ -1,12 +1,10 @@
 SET SEARCH_PATH TO TRABALHO_G1;
 
-CREATE OR REPLACE FUNCTION decre_ingresso () 
+CREATE OR REPLACE FUNCTION incre_ingresso () 
 RETURNS trigger AS $$
 	BEGIN
-		update sessao set ingressos_disponiveis = ingressos_disponiveis - 1
+		update sessao set ingressos_disponiveis = ingressos_disponiveis + 1
 		
-CREATE TRIGGER decre_ingre_disponivel AFTER INSERT ON reserva
+CREATE TRIGGER incre_ingre_disponivel AFTER DELETE ON reserva
 	FOR EACH ROW
-		EXECUTE FUNCTION decre_ingresso();		
-		
-		
+		EXECUTE FUNCTION incre_ingresso();	
