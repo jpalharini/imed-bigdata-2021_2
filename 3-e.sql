@@ -9,9 +9,19 @@ CREATE TABLE notificacao
 ALTER TABLE notificacao 
 	ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY;
 
-CREATE OR REPLACE PROCEDURE declarar_valores(cliente IN INT)
-LANGUAGE SQL
+CREATE OR REPLACE PROCEDURE declarar_valores(cliente IN INTEGER)
+LANGUAGE plpgsql
 AS $$
-	INSERT INTO sessao (cod_espetaculo, data_hora_inicio, cod_periodicidade, duracao, preco, total_ingressos, ingressos_disponiveis)
-		VALUES (cod_espetaculo, inicio, cod_periodicidade, duracao, preco, 0, 0);
+	DECLARE
+		pc RECORD;
+	BEGIN
+		FOR pc IN 
+				SELECT * FROM pedido WHERE cod_cliente = cliente AND data_pedido > CURRENT_DATE - INTERVAL '30' DAY
+			LOOP
+				INSERT INTO notificacao (data_pedido, cod_pedido, mensagem)
+					VALUES (pc.data_pedido, 
+							pc.cod_pedido,
+					    	(SELECT SUM(s.preco) FROM sessao s INNER JOIN reserva r ON pc.cod_pedido = r.cod_pedido));
+			END LOOP;
+	END;
 $$;
