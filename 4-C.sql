@@ -4,6 +4,7 @@ CREATE OR REPLACE FUNCTION decre_ingresso ()
 RETURNS trigger AS $$
 	BEGIN
 		update sessao set ingressos_disponiveis = ingressos_disponiveis - 1;
+		RETURN NEW;
 	END;
 	
 $$ LANGUAGE plpgsql;

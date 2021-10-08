@@ -17,9 +17,8 @@ RETURNS trigger AS $$
 					USING HINT = 'Favor selecionar outra sessão';
 		END IF;
 	END;
-$$ LANGUAGE plpgsql
+$$ LANGUAGE plpgsql;
 
 CREATE TRIGGER reserva_com_ingresso_disponivel BEFORE INSERT ON reserva
 	FOR EACH ROW
 		EXECUTE FUNCTION tem_ingressos_disponiveis();
-		
